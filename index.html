@@ -3,124 +3,539 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhinav Ravi | AI Researcher | Krutrim, Myntra, IIT Guwahati</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Abhinav Ravi - AI Researcher</title>
     <style>
-        body { font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #333; }
-        .hero { background: rgba(255,255,255,0.9); padding: 100px 0; text-align: center; }
-        .section { padding: 80px 0; }
-        .pub-card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 20px; }
-        .creative { background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --secondary: #8b5cf6;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #06b6d4;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 2rem;
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            color: var(--dark);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .research-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--primary);
+        }
+
+        .research-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .research-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .research-card .authors {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .research-card .venue {
+            display: inline-block;
+            background: #e0e7ff;
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+        }
+
+        .experience-timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        .experience-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 4px #e0e7ff;
+        }
+
+        .experience-item h3 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .company {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .duration {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: scale(1.05);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .skill-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .contact-section {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-section .section-title {
+            color: white;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: white;
+        }
+
+        footer {
+            background: #020617;
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <h1 class="display-3 fw-bold">Abhinav Ravi</h1>
-            <h2 class="lead">AI Researcher & Leader in Multilingual LLMs and Vision-Language Models</h2>
-            <p class="fs-5">Pioneering Indic AI at Krutrim | Publications at NeurIPS & EMNLP | Ex-Myntra</p>
-            <a href="https://www.linkedin.com/in/raviabhinaviitg/" class="btn btn-primary btn-lg me-3">LinkedIn</a>
-            <a href="https://www.instagram.com/ravi.abhinav3/" class="btn btn-outline-primary btn-lg">Instagram (Creative)</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">About Me</h2>
-            <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <p>Associate Director at Krutrim, leading development of India's first multilingual VLM (Chitrarth) and vision benchmark (BharatLens). Expertise in continual pre-training, RLHF/DPO, and Web RAG. Passionate about deep learning, CV, NLP for Indic languages. Creative pursuits on Instagram blend AI with art. [web:3]</p>
-                </div>
+        <div class="hero-content">
+            <h1>Abhinav Ravi</h1>
+            <div class="subtitle">AI Researcher & Machine Learning Engineer</div>
+            <div class="tagline">Building multilingual AI systems for over a billion people</div>
+            <div class="social-links">
+                <a href="https://scholar.google.com/citations?user=fK8F9EcAAAAJ" target="_blank" title="Google Scholar">🎓</a>
+                <a href="https://www.linkedin.com/in/raviabhinaviitg/" target="_blank" title="LinkedIn">💼</a>
+                <a href="https://github.com/abhinav3" target="_blank" title="GitHub">💻</a>
+                <a href="https://www.instagram.com/ravi.abhinav3/" target="_blank" title="Instagram">📸</a>
             </div>
         </div>
     </section>
 
-    <!-- Research Section -->
     <section class="section">
-        <div class="container">
-            <h2 class="text-center mb-5">Research & Publications</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="pub-card p-4">
-                        <h4>Chitrarth: India's First Multilingual VLM</h4>
-                        <p>NeurIPS 2024. Spearheaded creation for Indic tasks.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="pub-card p-4">
-                        <h4>Chitranuvaad</h4>
-                        <p>EMNLP 2024. Advancing inclusive AI.</p>
-                    </div>
-                </div>
+        <h2 class="section-title">About</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I'm an AI researcher at <strong>Krutrim AI Labs</strong>, working on cutting-edge multilingual language models designed for India's diverse linguistic landscape. My research focuses on making AI accessible to over a billion people through culturally-aware and linguistically-inclusive systems.</p>
+                <p>Originally from <strong>Muzaffarpur, Bihar</strong>, I completed my schooling at <strong>DAV Public School</strong> and <strong>DPS Bokaro Steel City</strong> before pursuing Computer Science at <strong>IIT Guwahati</strong>. There, I developed a passion for machine learning, computer vision, and natural language processing. My work spans across conversational AI, multi-modal systems, and deep metric learning.</p>
+                <p>Beyond research, I'm deeply curious about the frontiers of human knowledge and enjoy exploring creative pursuits through photography and visual storytelling.</p>
             </div>
-            <div class="text-center mt-4">
-                <a href="mailto:ravi.abhinav3@gmail.com" class="btn btn-primary">View Full CV</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="section bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5">Experience</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <h4>Associate Director, Krutrim (2023-Present)</h4>
-                    <ul>
-                        <li>Developed BharatLens benchmark and multilingual AI assistant.</li>
-                        <li>Implemented OCR (Shabdarth), Document Intelligence.</li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <h4>Staff/Senior/Lead Data Scientist, Myntra (2016-2023)</h4>
-                    <ul>
-                        <li>Fashion object detection, image search, multilingual NLP.</li>
-                        <li>Supply chain predictions, catalogue automation.</li>
-                    </ul>
+            <div class="about-visual">
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); height: 400px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                    🧠🤖
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills & Education -->
-    <section class="section creative">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-4">
-                    <h4>Skills</h4>
-                    <ul class="list-unstyled">
-                        <li>LLMs, VLMs, RLHF/DPO</li>
-                        <li>Computer Vision, NLP</li>
-                        <li>PyTorch, Python, Java</li>
-                    </ul>
+    <section class="section" style="background: #f8fafc;">
+        <h2 class="section-title">Education</h2>
+        <div class="research-grid">
+            <div class="research-card">
+                <h3>Bachelor of Technology (B.Tech)</h3>
+                <p class="authors">Computer Science & Engineering</p>
+                <p><strong>Indian Institute of Technology (IIT) Guwahati</strong></p>
+                <p>Graduated with honors in 2016. Focused on Machine Learning, Computer Vision, and Algorithms. Completed multiple research projects under faculty guidance.</p>
+                <span class="venue">2012 - 2016</span>
+            </div>
+
+            <div class="research-card">
+                <h3>Senior Secondary Education (Class 11-12)</h3>
+                <p class="authors">CBSE Board</p>
+                <p><strong>Delhi Public School (DPS), Bokaro Steel City</strong></p>
+                <p>Specialized in Science stream with Mathematics, Physics, and Chemistry. Developed strong analytical and problem-solving foundations.</p>
+                <span class="venue">2010 - 2012</span>
+            </div>
+
+            <div class="research-card">
+                <h3>Secondary Education (Class 1-10)</h3>
+                <p class="authors">CBSE Board</p>
+                <p><strong>DAV Public School, Muzaffarpur, Bihar</strong></p>
+                <p>Completed foundational education with consistent academic excellence. Participated in various science and mathematics competitions.</p>
+                <span class="venue">2002 - 2010</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Research & Publications</h2>
+        <div class="research-grid">
+            <div class="research-card">
+                <h3>Krutrim LLM: Multilingual Foundational Model for over a Billion People</h3>
+                <p class="authors">A. Kallappa, P. Kamble, <strong>A. Ravi</strong>, et al.</p>
+                <p>Introducing a 2 trillion token multilingual model designed for India's linguistic landscape with the largest known Indic dataset. Matches or exceeds LLAMA-2 performance while ensuring balanced representation across dialects.</p>
+                <span class="venue">arXiv 2025</span>
+            </div>
+
+            <div class="research-card">
+                <h3>Chitrarth: Inclusive Vision-Language Model</h3>
+                <p class="authors"><strong>A. Ravi</strong> and team</p>
+                <p>A state-of-the-art multimodal VLM targeting 10 prominent Indian languages, integrating visual reasoning with multilingual capabilities. Introduces BharatBench for comprehensive evaluation.</p>
+                <span class="venue">Krutrim AI Labs</span>
+            </div>
+
+            <div class="research-card">
+                <h3>Detection and Localization of Metastasis Cancer Using Pathology Images</h3>
+                <p class="authors"><strong>A. Ravi</strong> and collaborators</p>
+                <p>Computer vision system for automated cancer detection. Won 2nd prize at PAN-IIT AI Conclave at IIT Delhi.</p>
+                <span class="venue">PAN-IIT AI Conclave</span>
+            </div>
+
+            <div class="research-card">
+                <h3>Color Variants Identification in Fashion E-Commerce</h3>
+                <p class="authors"><strong>A. Ravi</strong> et al.</p>
+                <p>Deep visual representation learning framework for identifying fashion products that match in design but differ in color, improving customer experience in e-commerce.</p>
+                <span class="venue">Research Publication</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Experience</h2>
+        <div class="experience-timeline">
+            <div class="experience-item">
+                <h3>AI Researcher</h3>
+                <div class="company">Krutrim AI Labs, Bangalore</div>
+                <div class="duration">2023 - Present</div>
+                <p>Leading research on multilingual LLMs and vision-language models for Indic languages. Core contributor to Krutrim LLM pre-training, fine-tuning, and alignment. Building foundational AI systems for over a billion people.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Machine Learning Engineer</h3>
+                <div class="company">Myntra (Flipkart Group)</div>
+                <div class="duration">2017 - 2023</div>
+                <p>Worked on computer vision and deep learning systems for fashion e-commerce. Developed recommendation engines, visual search systems, and product matching algorithms. Awarded "High Achiever" for exceptional DS model performance.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Software Developer Intern</h3>
+                <div class="company">CRM Solutions</div>
+                <div class="duration">May 2015 - July 2015</div>
+                <p>Built intelligent NLP-based auto-classifier and auto-replier system for customer relations. Tackled complex challenges including context maintenance and intent mining using supervised machine learning.</p>
+            </div>
+
+            <div class="experience-item">
+                <h3>Research Intern - Computer Vision</h3>
+                <div class="company">IIT Guwahati</div>
+                <div class="duration">May 2014 - July 2014</div>
+                <p>Under Dr. P.K. Das. Developed smart lighting system using OpenCV and computer vision to automatically control lighting based on human presence detection.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: #f8fafc;">
+        <h2 class="section-title">Research Interests & Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>Machine Learning</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Deep Learning</span>
+                    <span class="skill-tag">NLP</span>
+                    <span class="skill-tag">LLMs</span>
+                    <span class="skill-tag">Transformers</span>
                 </div>
-                <div class="col-md-4">
-                    <h4>Education</h4>
-                    <ul class="list-unstyled">
-                        <li>MS ML, Georgia Tech (2019-2021)</li>
-                        <li>B.Tech CSE, IIT Guwahati (2012-2016)</li>
-                    </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>Computer Vision</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Image Recognition</span>
+                    <span class="skill-tag">VLMs</span>
+                    <span class="skill-tag">OpenCV</span>
+                    <span class="skill-tag">Metric Learning</span>
                 </div>
-                <div class="col-md-4">
-                    <h4>Creative Side</h4>
-                    <p>Follow on Instagram for AI-art fusions and inspirations.</p>
+            </div>
+
+            <div class="skill-category">
+                <h3>AI Research</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Multilingual AI</span>
+                    <span class="skill-tag">Conversational AI</span>
+                    <span class="skill-tag">Multi-Modal AI</span>
+                    <span class="skill-tag">RAG</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Engineering</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">TensorFlow</span>
+                    <span class="skill-tag">CUDA</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="section bg-light">
-        <div class="container text-center">
-            <h2>Contact</h2>
-            <p>Email: ravi.abhinav3@gmail.com | Bengaluru, India</p>
-            <p>"Simplicity lies on the opposite of complexity" [attached_file:2]</p>
+    <section class="section contact-section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span>📧</span>
+                <a href="mailto:ravi.abhinav3@gmail.com">ravi.abhinav3@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <span>📍</span>
+                <span>Bangalore, India | From Muzaffarpur, Bihar</span>
+            </div>
+            <div class="contact-item">
+                <span>🎓</span>
+                <a href="https://scholar.google.com/citations?user=fK8F9EcAAAAJ" target="_blank">Google Scholar</a>
+            </div>
         </div>
     </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <footer>
+        <p>&copy; 2026 Abhinav Ravi. Building the future of multilingual AI.</p>
+    </footer>
 </body>
 </html>
