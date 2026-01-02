@@ -786,4 +786,107 @@
             <div class="skill-category">
                 <h3>AI Research</h3>
                 <div class="skill-tags">
-                    <span
+                    <span class="skill-tag">Multilingual AI</span>
+                    <span class="skill-tag">Conversational AI</span>
+                    <span class="skill-tag">Multi-Modal AI</span>
+                    <span class="skill-tag">RAG</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3>Engineering</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">TensorFlow</span>
+                    <span class="skill-tag">CUDA</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact-section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span>📧</span>
+                <a href="mailto:ravi.abhinav3@gmail.com">ravi.abhinav3@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <span>📍</span>
+                <span>Bangalore, India | From Muzaffarpur, Bihar</span>
+            </div>
+            <div class="contact-item">
+                <span>🎓</span>
+                <a href="https://scholar.google.com/citations?user=fK8F9EcAAAAJ" target="_blank">Google Scholar</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Abhinav Ravi. Building the future of multilingual AI.</p>
+    </footer>
+
+    <script>
+        const carousels = {
+            profile: { index: 0, total: 4 },
+            photo: { index: 0, total: 5 }
+        };
+
+        function initCarousels() {
+            createIndicators('profile', 4, 'profileIndicators');
+            createIndicators('photo', 5, 'photoIndicators');
+            updateCarousel('profile');
+            updateCarousel('photo');
+        }
+
+        function createIndicators(type, count, containerId) {
+            const container = document.getElementById(containerId);
+            for (let i = 0; i < count; i++) {
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator' + (i === 0 ? ' active' : '');
+                indicator.onclick = () => goToSlide(type, i);
+                container.appendChild(indicator);
+            }
+        }
+
+        function moveCarousel(type, direction) {
+            carousels[type].index += direction;
+            if (carousels[type].index < 0) {
+                carousels[type].index = carousels[type].total - 1;
+            } else if (carousels[type].index >= carousels[type].total) {
+                carousels[type].index = 0;
+            }
+            updateCarousel(type);
+        }
+
+        function goToSlide(type, index) {
+            carousels[type].index = index;
+            updateCarousel(type);
+        }
+
+        function updateCarousel(type) {
+            const carousel = document.getElementById(type + 'Carousel');
+            const indicators = document.getElementById(type + 'Indicators').children;
+            
+            carousel.style.transform = `translateX(-${carousels[type].index * 100}%)`;
+            
+            Array.from(indicators).forEach((indicator, i) => {
+                indicator.classList.toggle('active', i === carousels[type].index);
+            });
+        }
+
+        // Auto-advance carousels
+        setInterval(() => {
+            moveCarousel('profile', 1);
+        }, 5000);
+
+        setInterval(() => {
+            moveCarousel('photo', 1);
+        }, 6000);
+
+        // Initialize on load
+        window.addEventListener('load', initCarousels);
+    </script>
+</body>
+</html>
