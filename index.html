@@ -657,6 +657,7 @@
                     <div class="photo-carousel-item"><img src="img/art3.jpg" alt="Creative Moment 1"></div>
                     <div class="photo-carousel-item"><img src="img/art4.jpg" alt="Creative Moment 2"></div>
                     <div class="photo-carousel-item"><img src="img/art5.jpg" alt="Creative Moment 3"></div>
+                    <div class="photo-carousel-item"><img src="img/drone.jpg" alt="Creative Moment 4"></div>
                 </div>
                 <div class="carousel-controls">
                     <button class="carousel-btn" onclick="moveCarousel('photo', -1)">‹</button>
@@ -834,12 +835,12 @@
     <script>
         const carousels = {
             profile: { index: 0, total: 8 },
-            photo: { index: 0, total: 5 }
+            photo: { index: 0, total: 6 }
         };
 
         function initCarousels() {
             createIndicators('profile', 8, 'profileIndicators');
-            createIndicators('photo', 5, 'photoIndicators');
+            createIndicators('photo', 6, 'photoIndicators');
             updateCarousel('profile');
             updateCarousel('photo');
         }
