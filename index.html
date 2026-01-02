@@ -212,7 +212,12 @@
         .carousel {
             display: flex;
             transition: transform 0.5s ease;
+            cursor: grab;
+            user-select: none;    
         }
+        .carousel:active {                
+            cursor: grabbing;            
+        } 
 
         .carousel-item {
             min-width: 100%;
@@ -553,7 +558,13 @@
         .photo-carousel {
             display: flex;
             transition: transform 0.5s ease;
+            cursor: grab;       
+            user-select: none;  
         }
+
+        .photo-carousel:active {
+            cursor: grabbing;   
+        }                       
 
         .photo-carousel-item {
             min-width: 100%;
@@ -837,13 +848,88 @@
             profile: { index: 0, total: 8 },
             photo: { index: 0, total: 6 }
         };
+        let touchStartX = 0;                 // ← ADDED
+        let touchEndX = 0;                   // ← ADDED
 
         function initCarousels() {
             createIndicators('profile', 8, 'profileIndicators');
             createIndicators('photo', 6, 'photoIndicators');
             updateCarousel('profile');
             updateCarousel('photo');
+
+            // Add touch event listeners       // ← ADDED
+            setupTouchEvents('profileCarousel', 'profile');  // ← ADDED
+            setupTouchEvents('photoCarousel', 'photo');      // ← ADDED
         }
+
+        
+        // ← ADD THIS ENTIRE FUNCTION (after initCarousels)
+        function setupTouchEvents(carouselId, type) {
+            const carousel = document.getElementById(carouselId);
+            
+            carousel.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            carousel.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe(type);
+            }, { passive: true });
+
+            // Mouse drag for desktop
+            let isDragging = false;
+            let startX = 0;
+
+            carousel.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.pageX;
+                carousel.style.cursor = 'grabbing';
+            });
+
+            carousel.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+            });
+
+            carousel.addEventListener('mouseup', (e) => {
+                if (!isDragging) return;
+                isDragging = false;
+                carousel.style.cursor = 'grab';
+                
+                const endX = e.pageX;
+                const diff = startX - endX;
+                
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) {
+                        moveCarousel(type, 1);
+                    } else {
+                        moveCarousel(type, -1);
+                    }
+                }
+            });
+
+            carousel.addEventListener('mouseleave', () => {
+                isDragging = false;
+                carousel.style.cursor = 'grab';
+            });
+        }
+
+        // ← ADD THIS ENTIRE FUNCTION (after setupTouchEvents)
+        function handleSwipe(type) {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swiped left - go to next
+                    moveCarousel(type, 1);
+                } else {
+                    // Swiped right - go to previous
+                    moveCarousel(type, -1);
+                }
+            }
+        }
+
 
         function createIndicators(type, count, containerId) {
             const container = document.getElementById(containerId);
